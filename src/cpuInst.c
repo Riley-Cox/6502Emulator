@@ -2,7 +2,7 @@
 
 reg cpuReg;
 mem memory;
-inst cpuInst;
+bus Bus;
 
 void reset(){
 	cpuReg.programCounter = 0xFFFC;
@@ -20,17 +20,17 @@ void reset(){
 
 void push(uint8_t data){
 	memory.stackSpace[cpuReg.stackPointer] = data;
-	cpuReg.stackPointer -= 0x1;
+	cpuReg.stackPointer--;
 }
 
 uint8_t pop(){
 	uint8_t data = memory.stackSpace[cpuReg.stackPointer];
-	cpuReg.stackPointer += 0x1;
+	cpuReg.stackPointer++;
 	return data;
 }	
 
 void execute(){
-	mem fetchedInst;
+	uint8_t fetchedInst;
 	while(1){
 		fetchedInst = fetch();
 	}	
@@ -38,9 +38,9 @@ void execute(){
 
 uint8_t fetch(){
 	uint8_t buff;
-	buff = memory.memorySpace[cpuReg.programCounter];
-	cpuReg.programCounter += 0x1;
-	return buff;	
+		buff = memory.memorySpace[cpuReg.programCounter];
+		cpuReg.programCounter++;
+		return buff;
 }
 	
 	

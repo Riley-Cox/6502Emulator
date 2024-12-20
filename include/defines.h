@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <math.h>
+#include <bool.h>
 
 #ifndef _DEFINES_H
 #define _DEFINES_h
@@ -22,6 +23,13 @@ typedef struct {
 	uint8_t indexRegisterY;
 	uint8_t accumRegister;
 } reg;
+
+typedef struct {
+	uint8_t dataBus;
+	uint16_t addrBus;
+	bool busEnable; //Active high, when asserted the processor can drive the data line
+} bus;
+	
 
 //Function Declarations
 
@@ -46,7 +54,7 @@ uint8_t pop();
 /************************
 * execute - main execute loop to take execute next instruction
 *************************/
-void execute(mem inst);
+void execute();
 
 /************************
 * fetch - fetches the next instruction from memory to be executed
