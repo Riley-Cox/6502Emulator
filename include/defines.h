@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <math.h>
-#include <bool.h>
+#include <stdbool.h>
 
 #ifndef _DEFINES_H
 #define _DEFINES_h

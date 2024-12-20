@@ -29,18 +29,26 @@ uint8_t pop(){
 	return data;
 }	
 
-void execute(){
+void execute(){ // on a clock cycle we need to fetch the next instruction from memory and execute it 
 	uint8_t fetchedInst;
-	while(1){
+	while(1){//?? This isn't verilog so idk how to model the clock pulse
 		fetchedInst = fetch();
+		(void)fetchedInst;
 	}	
 }
 
 uint8_t fetch(){
 	uint8_t buff;
-		buff = memory.memorySpace[cpuReg.programCounter];
-		cpuReg.programCounter++;
-		return buff;
+	Bus.addrBus = memory.memorySpace[cpuReg.programCounter];
+		//Will have to do some waiting to grab data from ROM
+		if(!Bus.busEnable){
+			buff = Bus.dataBus; //Grab data off the data bus after asking for it from the address location
+			cpuReg.programCounter++;
+			return buff;
+		}
+		else
+			return 0;
+		
 }
 	
 	
