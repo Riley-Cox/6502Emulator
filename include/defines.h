@@ -23,8 +23,6 @@ typedef struct {
 	uint8_t accumRegister;
 } reg;
 
-
-
 //Function Declarations
 
 /*************************
@@ -33,11 +31,28 @@ typedef struct {
 **************************
 */
 void reset();
-
+/************************
+* push - pushes data onto the stack and decrements stack pointer
+* data - data to be pushed onto stack
+*************************/
 void push(uint8_t data);
 
+/************************
+* pop - pops item off stack and increments the stack pointer
+* returns the data from the stack
+*************************/
 uint8_t pop();
 
+/************************
+* execute - main execute loop to take execute next instruction
+*************************/
+void execute(mem inst);
+
+/************************
+* fetch - fetches the next instruction from memory to be executed
+* returns the instruction of type mem 
+*************************/
+uint8_t fetch();
 
 
 

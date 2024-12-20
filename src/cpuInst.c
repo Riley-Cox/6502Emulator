@@ -23,7 +23,6 @@ void push(uint8_t data){
 	cpuReg.stackPointer -= 0x1;
 }
 
-
 uint8_t pop(){
 	uint8_t data = memory.stackSpace[cpuReg.stackPointer];
 	cpuReg.stackPointer += 0x1;
@@ -31,12 +30,17 @@ uint8_t pop(){
 }	
 
 void execute(){
-	inst fetchedInst;
+	mem fetchedInst;
 	while(1){
 		fetchedInst = fetch();
 	}	
 }
 
-inst fetch(){
+uint8_t fetch(){
+	uint8_t buff;
+	buff = memory.memorySpace[cpuReg.programCounter];
+	cpuReg.programCounter += 0x1;
+	return buff;	
+}
 	
 	
