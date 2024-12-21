@@ -38,6 +38,7 @@ void execute(){ // on a clock cycle we need to fetch the next instruction from m
 			
 	}	
 }
+}
 
 uint8_t fetch(){
 	uint8_t buff;
@@ -50,7 +51,6 @@ uint8_t fetch(){
 		}
 		else
 			return 0;
-		
 }
 	
 	

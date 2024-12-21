@@ -61,7 +61,7 @@
 #define ROL_Z 0x26
 #define ROL_ZX 0x36
 #define ROL_A 0x2E
-#define ROL_ZX 0x3E
+#define ROL_AX 0x3E
 //ROR instruction 
 #define ROR_AC 0x6A
 #define ROR_Z 0x66
