@@ -34,6 +34,8 @@ void execute(){ // on a clock cycle we need to fetch the next instruction from m
 	while(1){//?? This isn't verilog so idk how to model the clock pulse
 		fetchedInst = fetch();
 		(void)fetchedInst;
+		switch (fetchedInst){
+			
 	}	
 }
 
