@@ -1,4 +1,5 @@
 #include "defines.h"
+#include <stdio.h>
 
 reg cpuReg;
 mem memory;
@@ -18,17 +19,20 @@ void reset(){
 	}
 }
 
+//Stack push function
 void push(uint8_t data){
 	memory.stackSpace[cpuReg.stackPointer] = data;
 	cpuReg.stackPointer -= 0x1;
 }
 
+//Stack pop function
 uint8_t pop(){
 	uint8_t data = memory.stackSpace[cpuReg.stackPointer];
 	cpuReg.stackPointer += 0x1;
 	return data;
 }	
 
+//Main code loop, 
 void execute(){
 	mem fetchedInst;
 	while(1){
@@ -36,11 +40,11 @@ void execute(){
 	}	
 }
 
+//Fetch instructions 
 uint8_t fetch(){
 	uint8_t buff;
 	buff = memory.memorySpace[cpuReg.programCounter];
 	cpuReg.programCounter += 0x1;
 	return buff;	
 }
-	
 	

@@ -54,6 +54,10 @@ void execute(mem inst);
 *************************/
 uint8_t fetch();
 
+/************************
+* loadMem - loads the program into memory to allow for fetching
+*************************/
+int loadMem(char *fileName);
 
 
 
