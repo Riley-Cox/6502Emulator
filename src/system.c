@@ -16,7 +16,6 @@ int loadMem(char *filename, mem *memory){
     return 0;
   }
 
-  //Need to seperate instruction address from instruction
   while ((read = getline(&line, &len, fp)) != -1) {
     printf("Retrieved line of length %zu:\n", read);
     char *data = strchr(line, ':');

@@ -45,7 +45,9 @@ uint32_t fetch(reg *cpuReg, mem *memory){
 }
 
 uint32_t decode(uint32_t inst){
+  uint32_t decodedInst;
 
+  
 
 }
 	

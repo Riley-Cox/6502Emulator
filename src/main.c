@@ -5,6 +5,7 @@
 
 int main(int argc, char *argv[]){
   int file;
+  uint32_t 
   reg *cpuReg = (reg *) malloc(sizeof(reg));
   mem *memory = (mem *) malloc(sizeof(mem));
 	reset(cpuReg, memory); // Initialize cpu registers
@@ -15,7 +16,13 @@ int main(int argc, char *argv[]){
     free(memory);
   }
   else{
-  execute();   
+  while (1){
+    inst = fetch(cpuReg, memory);
+    if(inst == 0)
+     exit(1);   
+    decode(inst);
+    execute();   
+  }
 
 	
 
