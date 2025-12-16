@@ -1,16 +1,15 @@
 #include <stdio.h>
 #include <stdint.h>
-#include <math.h>
 
 #ifndef _DEFINES_H
 #define _DEFINES_h
 
-#define AS 16 * 1024
+#define AS 64 * 1024
 #define SP 256
 
 
 typedef struct {
-	uint8_t memorySpace[AS];
+	uint32_t memorySpace[AS];
 	uint8_t stackSpace[SP];
 } mem;
 
@@ -30,34 +29,36 @@ typedef struct {
 * cpu - register variable that holds essential regsiters
 **************************
 */
-void reset();
+void reset(reg *cpuReg, mem *memory);
 /************************
 * push - pushes data onto the stack and decrements stack pointer
 * data - data to be pushed onto stack
 *************************/
-void push(uint8_t data);
+void push(uint8_t data, reg *cpuReg, mem *memory);
 
 /************************
 * pop - pops item off stack and increments the stack pointer
 * returns the data from the stack
 *************************/
-uint8_t pop();
+uint8_t pop(reg *cpuReg, mem *memory);
 
 /************************
 * execute - main execute loop to take execute next instruction
 *************************/
-void execute(mem inst);
+void execute();
 
 /************************
 * fetch - fetches the next instruction from memory to be executed
 * returns the instruction of type mem 
 *************************/
-uint8_t fetch();
+uint32_t fetch(reg *cpuReg, mem *memory);
+
+uint32_t decode(uint32_t inst);
 
 /************************
 * loadMem - loads the program into memory to allow for fetching
 *************************/
-int loadMem(char *fileName);
+int loadMem(char *fileName, mem *memory);
 
 
 
@@ -65,5 +66,4 @@ int loadMem(char *fileName);
 
 
 #endif
-
 

@@ -1,50 +1,51 @@
-#include "defines.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include "defines.h"
 
-reg cpuReg;
-mem memory;
-inst cpuInst;
 
-void reset(){
-	cpuReg.programCounter = 0xFFFC;
-	cpuReg.stackPointer = 0xFF;
-	cpuReg.statusRegister |= ~0xFB; //Set interrupt disable
-	cpuReg.statusRegister &= 0xF7;
-	cpuReg.accumRegister = 0x00;
-	cpuReg.indexRegisterX = 0x00;
-	cpuReg.indexRegisterY = 0x00;	
+
+
+void reset(reg *cpuReg, mem *memory){
+	cpuReg->programCounter = 0x0000;
+	cpuReg->stackPointer = 0xFF;
+	cpuReg->statusRegister |= ~0xFB; //Set interrupt disable
+	cpuReg->statusRegister &= 0xF7;
+	cpuReg->accumRegister = 0x00;
+	cpuReg->indexRegisterX = 0x00;
+	cpuReg->indexRegisterY = 0x00;	
 	
 	for(int i = 0; i < AS; i++){
-		memory.memorySpace[i] = 0;
+		memory->memorySpace[i] = 0;
 	}
 }
 
 //Stack push function
-void push(uint8_t data){
-	memory.stackSpace[cpuReg.stackPointer] = data;
-	cpuReg.stackPointer -= 0x1;
+void push(uint8_t data, reg *cpuReg, mem *memory){
+	memory->stackSpace[cpuReg->stackPointer] = data;
+	cpuReg->stackPointer -= 0x1;
 }
 
 //Stack pop function
-uint8_t pop(){
-	uint8_t data = memory.stackSpace[cpuReg.stackPointer];
-	cpuReg.stackPointer += 0x1;
+uint8_t pop(reg *cpuReg, mem *memory){
+	uint8_t data = memory->stackSpace[cpuReg->stackPointer];
+	cpuReg->stackPointer += 0x1;
 	return data;
 }	
 
 //Main code loop, 
 void execute(){
-	mem fetchedInst;
-	while(1){
-		fetchedInst = fetch();
-	}	
 }
 
 //Fetch instructions 
-uint8_t fetch(){
-	uint8_t buff;
-	buff = memory.memorySpace[cpuReg.programCounter];
-	cpuReg.programCounter += 0x1;
-	return buff;	
+uint32_t fetch(reg *cpuReg, mem *memory){
+  uint32_t inst;
+
+  inst = memory->memorySpace[cpuReg->programCounter];
+  cpuReg->programCounter += sizeof(inst);
+}
+
+uint32_t decode(uint32_t inst){
+
+
 }
 	

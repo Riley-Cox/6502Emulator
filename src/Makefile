@@ -7,7 +7,7 @@ EXE=bin
 _DEPS=defines.h
 DEPS=$(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ=main.o cpuInst.o
+_OBJ=main.o cpuInst.o system.o
 OBJ=$(patsubst %,$(ODIR)/%,$(_OBJ))
 
 $(EXE):
