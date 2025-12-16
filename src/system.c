@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
+#include <string.h>
 #include "defines.h"
 
 int loadMem(char *filename, mem *memory){
@@ -18,7 +19,13 @@ int loadMem(char *filename, mem *memory){
   //Need to seperate instruction address from instruction
   while ((read = getline(&line, &len, fp)) != -1) {
     printf("Retrieved line of length %zu:\n", read);
-    memory->memorySpace[i] = atoi(line);
+    char *data = strchr(line, ':');
+    if (!data)
+      continue;
+    data++;
+    while (*data == ' ')
+      data++;
+    memory->memorySpace[i] = atoi(data);
     i++;
   }
 
