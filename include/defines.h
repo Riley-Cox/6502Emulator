@@ -9,7 +9,7 @@
 
 
 typedef struct {
-	uint32_t memorySpace[AS];
+	uint8_t memorySpace[AS];
 	uint8_t stackSpace[SP];
 } mem;
 
@@ -53,14 +53,19 @@ void execute();
 *************************/
 uint32_t fetch(reg *cpuReg, mem *memory);
 
-uint32_t decode(uint32_t inst);
 
 /************************
 * loadMem - loads the program into memory to allow for fetching
 *************************/
-int loadMem(char *fileName, mem *memory);
+int loadMem(char *filename, mem *memory);
 
+void setFlags(uint8_t value);
 
+/**************************
+ * readByte - reads a byte of data from memory
+ * returns byte of data from memory location
+ **************************/
+uint8_t readByte(mem *location);
 
 
 

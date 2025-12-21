@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "defines.h"
+#include "decode.h"
 
 int main(int argc, char *argv[]){
   int file;

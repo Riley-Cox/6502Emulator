@@ -4,7 +4,7 @@ CFLAGS=-I$(IDIR) -std=c99 -Wall -lm
 ODIR=obj
 EXE=bin
 
-_DEPS=defines.h
+_DEPS=defines.h decode.h
 DEPS=$(patsubst %,$(IDIR)/%,$(_DEPS))
 
 _OBJ=main.o cpuInst.o system.o

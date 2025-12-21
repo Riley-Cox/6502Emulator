@@ -38,16 +38,12 @@ void execute(){
 
 //Fetch instructions 
 uint32_t fetch(reg *cpuReg, mem *memory){
-  uint32_t inst;
+  uint8_t inst;
 
   inst = memory->memorySpace[cpuReg->programCounter];
-  cpuReg->programCounter += sizeof(inst);
+  cpuReg->programCounter += 1;
 }
 
-uint32_t decode(uint32_t inst){
-  uint32_t decodedInst;
+uint8_t readByte(mem *memory, int location){
+  return memory->memorySpace[location]; 
 
-  
-
-}
-	
