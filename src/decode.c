@@ -6,7 +6,7 @@
 
 
 
-//-------------------------HELPER FUNCITONS---------------------------
+//-------------------------HELPER FUNCTIONS---------------------------
 uint8_t zeroX(reg *cpu, instruction *operand){
   uint8_t value = operand->operands + cpu->indexRegisterX;
   value = value & 0x00FF;
@@ -46,7 +46,7 @@ uint8_t indirY(reg *cpu, instruction *operand){
 
 
 
-//----------------------------MAIN INSTRUCTIONS----------------------
+//----------------------------OPCODE INSTRUCTIONS----------------------
 void opAdd(reg *cpu, uint8_t value){
   cpu->accumRegister += (value + (cpu->statusRegister & 0x01));
   setFlags(cpu->accumRegister);
@@ -56,12 +56,13 @@ void opAND(reg *cpu, uint8_t value){
   cpu->accumRegister & value;
   setFlags(cpu->accumRegister);
 }
-
-void opASL(reg *cpu, mem* memory, bool isMem, uint16_t location){
+// I think we need to create a write byte helper function here 
+void opASL(reg *cpu, bool isMem, uint16_t location){
   if(isMem){
-    if(memory->memSpace[location] & 0x80)
+    if(readByte(location) & 0x80)
       cpu->statusRegister |= 0x01;
-    memory->memSpace[location] = memory->memSpace[location] << 1;
+    uint8_t value = readByte(location) << 1;
+    writeByte(location, value);
   }  
   else{
     if(cpu->accumRegister & 0x80)
@@ -69,7 +70,51 @@ void opASL(reg *cpu, mem* memory, bool isMem, uint16_t location){
     cpu->accumRegister = cpu->accumRegister << 1;
   }
 }
+//TODO: Might need to look more closely on the branching to determine how far back the PC needs to be when we add the value to it
+void opBCC(reg *cpu, uin8_t value){
+  if(cpu->statusRegister & 0x01)
+    (cpu->programCounter = cpu->programCounter - 1 + value);
+}
 
+void opBCS(reg *cpu, uint8_t value){
+  if(!(cpu->statusRegister & 0x01))
+    (cpu->programCounter = cpu->programCounter - 1 + value);
+}
+
+void opBEQ(reg *cpu, uint8_t value){
+  if(!(cpu->statusRegister & 0x02))
+    (cpu->programCounter = cpu->programCounter - 1 + value);
+}
+
+void opBIT(reg *cpu, uint16_t location){
+  uint8_t value = readByte(location);
+  cpu->statusRegister |= (|(value & cpu->accumRegister));
+  cpu->statusRegister |= (value & 0xE0);
+  cpu->statusRegister |= (value & 0x80);
+}
+
+void opBMI(reg *cpu, uint8_t value){
+  if(cpu->statusRegister & 0xE0)
+    cpu->programCounter = cpu->programCounter - 1 + value;
+}
+
+void opBNE(reg *cpu, uint8_t value){
+  if(!(cpu->statusRegister & 0x80))
+    cpu->programCounter = cpu->programCounter - 1 + value;
+}
+
+void opBPL(reg *cpu, uint8_t value){
+  if(!(cpu->statusRegister & 0xE0))
+    cpu->programCounter = cpu->programCounter - 1 + value;
+}
+
+void opBRK(reg *cpu){
+
+}
+
+void opBVC(reg *cpu, uint8_t value){
+
+}
 //----------------------------------------------------------------------
 
 
@@ -127,4 +172,8 @@ void opANDIndirY(reg *cpu, instruction *operand){
   opAND(cpu, indirY(cpu, operand));
 }
 
-void 
+void opASLAccu(reg *cpu, instruction *operand){
+  opASL(cpu,cpu->accumRegister); 
+}
+
+

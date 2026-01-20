@@ -15,6 +15,17 @@ typedef struct {
   uint16_t operands;
 } instruction;
 
+//--------------------------HELPER FUNCTIONS-------------------------
+uint8_t zeroX(reg *cpu, instruction *operand);
+uint8_t abs(reg *cpu, instruction *operand);
+uint8_t absX(reg *cpu, instruction *operand);
+uint8_t absY(reg *cpu, instruction *operand);
+uint8_t indirX(reg *cpu, instruction *operand);
+uint8_t indirY(reg *cpu, instruction *operand);
+//-------------------------------------------------------------------
+
+//This needs restructuring
+
 void instructionMasking(uint32_t instr);
 
 void opAdd(reg *cpu, int value);

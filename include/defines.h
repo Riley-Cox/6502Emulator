@@ -65,7 +65,12 @@ void setFlags(uint8_t value);
  * readByte - reads a byte of data from memory
  * returns byte of data from memory location
  **************************/
-uint8_t readByte(mem *location);
+uint8_t readByte(uint8_t data);
+
+/***************************
+ * writeByte - writes a byte of data to a location in memory
+ ***************************/
+void writeByte(uint16_t location, uint8_t data);
 
 
 

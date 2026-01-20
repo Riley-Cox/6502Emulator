@@ -44,7 +44,19 @@ uint32_t fetch(reg *cpuReg, mem *memory){
   cpuReg->programCounter += 1;
 }
 
-uint8_t readByte(mem *memory, uint16_t location){
+uint8_t readByte(uint16_t location){
+  mem memory;
   uint16_t buf = (location << 8) & (location >> 8); 
-  return memory->memorySpace[buf]; 
+  return memory.memorySpace[buf]; 
+}
+
+void writeByte(uint16_t location, uint8_t data){
+  mem memory; 
+  uint16_t buf = (location << 8) & (location >> 8);
+  memory.memorySpace[buf] = value;
+}
+
+
+
+
 
