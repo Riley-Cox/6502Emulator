@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "defines.h"
 #include "and.h"
-#include "decode.h"
 
 void opAND(reg *cpu, uint8_t value){
   cpu->accumRegister = cpu->accumRegister & value;

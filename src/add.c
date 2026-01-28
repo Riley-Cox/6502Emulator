@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "decode.h"
 #include "add.h"
-#include "defines.h"
 
 
 void opADD(reg* cpu, uint8_t value){

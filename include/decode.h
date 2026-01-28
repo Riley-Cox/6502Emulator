@@ -5,8 +5,11 @@
 #ifndef _DECODE_H
 #define _DECODE_H
 
-#define OPCODE 0xFF0000
-#define OPERAND 0x00FFFF
+#define OPCODEMASK 0xFF0000
+#define OPERANDMASK 0x00FFFF
+
+//OPCODE defines
+#define ADCIMM 0x69
 
 typedef void (*op_handler_t)(reg *cpu);
 
@@ -23,6 +26,14 @@ uint8_t absY(reg *cpu, instruction *operand);
 uint8_t indirX(reg *cpu, instruction *operand);
 uint8_t indirY(reg *cpu, instruction *operand);
 //-------------------------------------------------------------------
+
+
+
+
+
+
+
+
 
 //This needs restructuring
 

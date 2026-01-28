@@ -6,15 +6,16 @@
 
 int main(int argc, char *argv[]){
   int file;
-  uint32_t 
-  reg *cpuReg = (reg *) malloc(sizeof(reg));
-  mem *memory = (mem *) malloc(sizeof(mem));
-	reset(cpuReg, memory); // Initialize cpu registers
+  //reg *cpuReg = (reg *) malloc(sizeof(reg));
+ //mem *memory = (mem *) malloc(sizeof(mem));
+  reg *cpuReg;
+  mem *memory;
+
+
+	reset(cpuReg); // Initialize cpu registers
   file = loadMem(argv[1], memory); 
   if (!file) {
     return 0;
-    free(cpuReg);
-    free(memory);
   }
   else{
   while (1){
@@ -28,8 +29,6 @@ int main(int argc, char *argv[]){
 	
 
 
-  free(cpuReg);
-  free(memory);
   return 0;
   }
 }
